@@ -19,6 +19,7 @@ async def get_doctor_info(doc_url: str):
         if doc_url is not None:
             logger.info("Doctoralia URL", url=doc_url)
             if not text_to_json.validate_url(doc_url):
+                logger.error("Invalid URL")
                 return {"error": "Invalid URL"}
             logger.info("Doctoralia URL Validated: ", url=doc_url)
             data_web = requests.get(doc_url, impersonate="chrome124")
