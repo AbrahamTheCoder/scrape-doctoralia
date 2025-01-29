@@ -1,7 +1,7 @@
 from sqlite3 import DataError
 from fastapi import FastAPI
 from curl_cffi import requests
-from helpers import extract_data
+from helpers import extract_data, text_to_json
 import uvicorn
 import structlog
 
@@ -18,6 +18,10 @@ async def get_doctor_info(doc_url: str):
     try:
         if doc_url is not None:
             logger.info("Doctoralia URL", url=doc_url)
+            if not text_to_json.validate_url(doc_url):
+                logger.error("Invalid URL")
+                return {"error": "Invalid URL"}
+            logger.info("Doctoralia URL Validated: ", url=doc_url)
             data_web = requests.get(doc_url, impersonate="chrome124")
             logger.info("Doctoralia Data Requested")
             if data_web.status_code == 200:

@@ -48,9 +48,10 @@ def get_doc_profile(doc_data: dict):
         doc_profile_url = f"https://www.doctoralia.com.mx/api/v3/doctors/{doc_id}/?with%5B%5D=doctor.license_numbers&with%5B%5D=doctor.specializations&with%5B%5D=doctor.addresses"
         headers = {
             "Authorization": f"Bearer {token}",
-            "Cookie": "Cookie=GUEST_SESSION=yAUViNGH25pNR6HID5OXavFjEZacxymIMeqOVHMt1S0",
+            # "Cookie": "Cookie=GUEST_SESSION=yAUViNGH25pNR6HID5OXavFjEZacxymIMeqOVHMt1S0",
         }
         doc_profile = requests.get(doc_profile_url, headers=headers)
+        logger.info("Doctor Profile Requested", profile=doc_profile)
         logger.info("Doctor Profile Requested")
         if doc_profile.status_code == 200:
             logger.info("Doctor Profile Data Received")
