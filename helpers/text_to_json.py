@@ -10,3 +10,8 @@ def quote_json(text):
     text = re.sub(r',\s*\]', ']', text)
     
     return text
+
+def validate_url(url: str):
+    # Check if the URL is valid
+    pattern = r'^(https?:\/\/)(\w+\.)*doctoralia\.com\.mx(/.*)?$'
+    return re.match(pattern, url) is not None
